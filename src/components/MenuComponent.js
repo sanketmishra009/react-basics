@@ -4,20 +4,11 @@ import {Card, CardImg, CardImgOverlay,CardText, CardBody, CardTitle} from 'react
 import Dishdetail from './DishdetailComponent';
 
 class Menu extends Component{
-    constructor(props){
-        super(props)
-        this.state={
-            selectedDish:null
-        }
-    }
-    onDishSelect(dish){
-        this.setState({selectDish:dish});
-    }
     render(){
         const menu = this.props.dishes.map((dish)=>{
             return(
                 <div className="col-12 col-md-5 m-1">
-                    <Card key={dish.id} onClick={() => this.onDishSelect(dish)}>
+                    <Card key={dish.id} onClick={() => this.props.onClick(dish.id)}>
                         <CardImg width="100%" src={dish.image} alt={dish.name}>
                         </CardImg>
                         <CardImgOverlay>
@@ -32,7 +23,6 @@ class Menu extends Component{
                 <div className='row'>
                     {menu}
                 </div>
-                <Dishdetail dish={this.state.selectDish}/>
             </div>
         );
     }
