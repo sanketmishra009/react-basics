@@ -1,6 +1,7 @@
 import React from 'react';
-import {Card, CardImg, CardImgOverlay,CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem} from 'reactstrap';
+import {Card, CardImg, CardImgOverlay,CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem, Button} from 'reactstrap';
 import {Link} from 'react-router-dom';
+import SubmitComment from './CommentComponent';
 
     function RenderDish({dish}){
         if (dish != null){
@@ -38,6 +39,7 @@ import {Link} from 'react-router-dom';
                                 );
                                 })}
                         </CardText>
+                        <SubmitComment/>
                     </CardBody>
                 </Card>
             );
