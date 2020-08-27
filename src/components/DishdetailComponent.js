@@ -24,7 +24,7 @@ import { Modal, ModalHeader, ModalBody, Form,FormGroup, Label,Input,Row,Col} fro
         if (comments != null){
             return(
                 <Card>
-                    <CardTitle middle><h4>Comments</h4></CardTitle>
+                    <CardTitle className='item-aling-center'><h4>Comments:</h4></CardTitle>
                     <CardBody>
                         <CardText>
                                 {comments.map((comment)=>{
