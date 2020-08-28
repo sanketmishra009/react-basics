@@ -20,7 +20,7 @@ import { Modal, ModalHeader, ModalBody, Form,FormGroup, Label,Input,Row,Col} fro
             return(<div></div>);
         }
     }
-    function RenderComment({comments}){
+    function RenderComment({comments, add_Comment, dishId}){
         if (comments != null){
             return(
                 <Card>
@@ -40,7 +40,7 @@ import { Modal, ModalHeader, ModalBody, Form,FormGroup, Label,Input,Row,Col} fro
                                 );
                                 })}
                         </CardText>
-                        <SubmitComment/>
+                        <SubmitComment add_Comment={add_Comment} dishId={dishId}/>
                     </CardBody>
                 </Card>
             );
@@ -68,7 +68,7 @@ import { Modal, ModalHeader, ModalBody, Form,FormGroup, Label,Input,Row,Col} fro
                         <RenderDish dish={props.dish} />
                     </div>
                     <div className="col-12 col-md-5 m-1">
-                        <RenderComment comments={props.comment}/>
+                        <RenderComment comments={props.comment} add_Comment={props.add_Comment} dishId={props.dish.id}/>
                     </div>
                 </div>
             </div>
@@ -84,11 +84,15 @@ import { Modal, ModalHeader, ModalBody, Form,FormGroup, Label,Input,Row,Col} fro
                 isModalOpen : false
             }
             this.toggleModal = this.toggleModal.bind(this);
+            this.handleSubmit = this.handleSubmit.bind(this);
         }
         toggleModal(){
             this.setState({
                 isModalOpen : !this.state.isModalOpen
             });
+        }
+        handleSubmit(values){
+            this.props.add_Comment(this.props.dishId,values.rating, values.yourname, values.comment);
         }
         render(){
             return(
@@ -98,7 +102,7 @@ import { Modal, ModalHeader, ModalBody, Form,FormGroup, Label,Input,Row,Col} fro
             <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                 <ModalHeader>SubmitComment</ModalHeader>
                 <ModalBody>
-                    <LocalForm>
+                    <LocalForm onSubmit = {(values) => this.handleSubmit(values) }>
                         <Row className='form-group'>
                             <Col>
                                 <Label>Rating:</Label>
