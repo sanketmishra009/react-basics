@@ -3,15 +3,16 @@ import {Card, CardImg, CardImgOverlay,CardText, CardBody, CardTitle, Breadcrumb,
 import {Link} from 'react-router-dom';
 import {Control, LocalForm, Errors} from 'react-redux-form';
 import { Modal, ModalHeader, ModalBody, Form,FormGroup, Label,Input,Row,Col} from 'reactstrap';
+import {Loading} from './loadingComponent';
 
-    function RenderDish({dish}){
-        if (dish != null){
+    function RenderDish(props){
+        if (props.dish != null){
             return(
                 <Card>
-                    <CardImg width="100%" src={dish.image} alt={dish.name}></CardImg>
+                    <CardImg width="100%" src={props.dish.image} alt={props.dish.name}></CardImg>
                     <CardBody>
-                        <CardTitle>{dish.name}</CardTitle>
-                        <CardText>{dish.description}</CardText>
+                        <CardTitle>{props.dish.name}</CardTitle>
+                        <CardText>{props.dish.description}</CardText>
                     </CardBody>
                 </Card>
             );
@@ -50,29 +51,49 @@ import { Modal, ModalHeader, ModalBody, Form,FormGroup, Label,Input,Row,Col} fro
         }
     }
     const Dishdetail= (props)=> {
-        return (
-            <div className="container">
-                <div className='row'>
-                    <Breadcrumb>
-                        <BreadcrumbItem><Link to='/home'>Home</Link></BreadcrumbItem>
-                        <BreadcrumbItem><Link to='/menu'>Menu</Link></BreadcrumbItem>
-                        <BreadcrumbItem>{props.dish.name}</BreadcrumbItem>
-                    </Breadcrumb>
-                    <div className='col-12'>
-                    <h2>{props.dish.name}</h2>
-                    <hr/>
+        if (props.isLoading) {
+            return(
+                <div className="container">
+                    <div className="row">            
+                        <Loading />
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col-12 col-md-5 m-1">
-                        <RenderDish dish={props.dish} />
-                    </div>
-                    <div className="col-12 col-md-5 m-1">
-                        <RenderComment comments={props.comment} add_Comment={props.add_Comment} dishId={props.dish.id}/>
+            );
+        }
+        else if (props.errmsg) {
+            return(
+                <div className="container">
+                    <div className="row">            
+                        <h4>{props.errMess}</h4>
                     </div>
                 </div>
-            </div>
-        );
+            );
+        }
+        else{
+            return (
+                <div className="container">
+                    <div className='row'>
+                        <Breadcrumb>
+                            <BreadcrumbItem><Link to='/home'>Home</Link></BreadcrumbItem>
+                            <BreadcrumbItem><Link to='/menu'>Menu</Link></BreadcrumbItem>
+                            <BreadcrumbItem>{props.dish.name}</BreadcrumbItem>
+                        </Breadcrumb>
+                        <div className='col-12'>
+                        <h2>{props.dish.name}</h2>
+                        <hr/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-12 col-md-5 m-1">
+                            <RenderDish dish={props.dish} isLoading={props.isLoading} errmsg = {props.errmsg} />
+                        </div>
+                        <div className="col-12 col-md-5 m-1">
+                            <RenderComment comments={props.comment} add_Comment={props.add_Comment} dishId={props.dish.id}/>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
     }
     const required = (val) => val && val.length;
     const maxLength = (len) => (val) => !(val) || (val.length <= len);
