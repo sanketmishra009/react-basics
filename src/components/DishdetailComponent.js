@@ -4,12 +4,13 @@ import {Link} from 'react-router-dom';
 import {Control, LocalForm, Errors} from 'react-redux-form';
 import { Modal, ModalHeader, ModalBody, Form,FormGroup, Label,Input,Row,Col} from 'reactstrap';
 import {Loading} from './loadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 
     function RenderDish(props){
         if (props.dish != null){
             return(
                 <Card>
-                    <CardImg width="100%" src={props.dish.image} alt={props.dish.name}></CardImg>
+                    <CardImg width="100%" src={baseUrl + props.dish.image} alt={props.dish.name}></CardImg>
                     <CardBody>
                         <CardTitle>{props.dish.name}</CardTitle>
                         <CardText>{props.dish.description}</CardText>
