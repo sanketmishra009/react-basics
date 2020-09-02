@@ -1,6 +1,6 @@
 import React ,{Component} from 'react';
 import Menu from "./MenuComponent";
-import {add_Comment, fetchDishes, fetchPromos, fetchComments} from '../redux/ActionCreators';
+import {postComment, fetchDishes, fetchPromos, fetchComments} from '../redux/ActionCreators';
 import { render } from '@testing-library/react';
 import Dishdetail from './DishdetailComponent';
 import Header from './Header';
@@ -21,7 +21,7 @@ const mapStateToProps = state => {
   }
 }
 const mapDispatchToProps = dispatch =>({
-  add_Comment:(dishId, rating, author, comment) => dispatch(add_Comment(dishId, rating, author, comment)),
+  postComment:(dishId, rating, author, comment) => dispatch(postComment(dishId, rating, author, comment)),
   fetchDishes: ()=> {dispatch(fetchDishes())},
   fetchComments: ()=> {dispatch(fetchComments())},
   fetchPromos: ()=> {dispatch(fetchPromos())},
@@ -59,7 +59,7 @@ class Main extends Component{
         errmsg={this.props.dishes.errMess}
         comment={this.props.comments.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId,10))}
         commentsErrMess={this.props.comments.errMess}
-        add_Comment={this.props.add_Comment}
+        postComment={this.props.postComment}
       />
       );
     }

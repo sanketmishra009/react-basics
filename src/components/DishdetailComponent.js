@@ -22,7 +22,7 @@ import { baseUrl } from '../shared/baseUrl';
             return(<div></div>);
         }
     }
-    function RenderComment({comments, add_Comment, dishId}){
+    function RenderComment({comments, postComment, dishId}){
         if (comments != null){
             return(
                 <Card>
@@ -42,7 +42,7 @@ import { baseUrl } from '../shared/baseUrl';
                                 );
                                 })}
                         </CardText>
-                        <SubmitComment add_Comment={add_Comment} dishId={dishId}/>
+                        <SubmitComment postComment={postComment} dishId={dishId}/>
                     </CardBody>
                 </Card>
             );
@@ -89,7 +89,7 @@ import { baseUrl } from '../shared/baseUrl';
                             <RenderDish dish={props.dish} isLoading={props.isLoading} errmsg = {props.errmsg} />
                         </div>
                         <div className="col-12 col-md-5 m-1">
-                            <RenderComment comments={props.comment} add_Comment={props.add_Comment} dishId={props.dish.id}/>
+                            <RenderComment comments={props.comment} postComment={props.postComment} dishId={props.dish.id}/>
                         </div>
                     </div>
                 </div>
@@ -114,7 +114,7 @@ import { baseUrl } from '../shared/baseUrl';
             });
         }
         handleSubmit(values){
-            this.props.add_Comment(this.props.dishId,values.rating, values.yourname, values.comment);
+            this.props.postComment(this.props.dishId,values.rating, values.yourname, values.comment);
         }
         render(){
             return(
