@@ -5,17 +5,25 @@ import {Control, LocalForm, Errors} from 'react-redux-form';
 import { Modal, ModalHeader, ModalBody, Form,FormGroup, Label,Input,Row,Col} from 'reactstrap';
 import {Loading} from './loadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import {FadeTransform, Fade, Stagger} from 'react-animation-components';
+
 
     function RenderDish(props){
         if (props.dish != null){
             return(
-                <Card>
-                    <CardImg width="100%" src={baseUrl + props.dish.image} alt={props.dish.name}></CardImg>
-                    <CardBody>
-                        <CardTitle>{props.dish.name}</CardTitle>
-                        <CardText>{props.dish.description}</CardText>
-                    </CardBody>
-                </Card>
+                <FadeTransform
+                in
+                transformProps={{
+                    exitTransform: 'scale(0.5) translateY(-50%)'
+                }}>
+                    <Card>
+                        <CardImg width="100%" src={baseUrl + props.dish.image} alt={props.dish.name}></CardImg>
+                        <CardBody>
+                            <CardTitle>{props.dish.name}</CardTitle>
+                            <CardText>{props.dish.description}</CardText>
+                        </CardBody>
+                    </Card>
+                </FadeTransform>
             );
         }
         else{
@@ -29,18 +37,22 @@ import { baseUrl } from '../shared/baseUrl';
                     <CardTitle className='item-aling-center'><h4>Comments:</h4></CardTitle>
                     <CardBody>
                         <CardText>
-                                {comments.map((comment)=>{
+                            <Stagger in>
+                            {comments.map((comment)=>{
                                 return(
-                                    <li className="list-unstyled">
-                                    <ul>
-                                        {comment.comment}
-                                    </ul>
-                                    <ul>
-                                        --{comment.author},&nbsp; {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}.
-                                    </ul>
-                                    </li>
+                                    <Fade>
+                                        <li className="list-unstyled">
+                                            <ul>
+                                                {comment.comment}
+                                            </ul>
+                                            <ul>
+                                                --{comment.author},&nbsp; {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}.
+                                            </ul>
+                                        </li>
+                                    </Fade>
                                 );
                                 })}
+                            </Stagger>
                         </CardText>
                         <SubmitComment postComment={postComment} dishId={dishId}/>
                     </CardBody>

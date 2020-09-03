@@ -15,7 +15,7 @@ function Footer(props) {
                         <li><Link to='/contact'>Contact Us</Link></li>
                     </ul>
                 </div>
-                <div className="col-7 col-sm-5">
+                <div className="col-7 col-sm-5" color="white" >
                     <h5>Our Address</h5>
                     <address>
 		              121, Clear Water Bay Road<br />
