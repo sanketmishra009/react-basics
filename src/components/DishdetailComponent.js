@@ -1,8 +1,8 @@
 import React,{Component} from 'react';
-import {Card, CardImg, CardImgOverlay,CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem, Button} from 'reactstrap';
+import {Card, CardImg,CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem, Button} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import {Control, LocalForm, Errors} from 'react-redux-form';
-import { Modal, ModalHeader, ModalBody, Form,FormGroup, Label,Input,Row,Col} from 'reactstrap';
+import { Modal, ModalHeader, ModalBody,Label,Row,Col} from 'reactstrap';
 import {Loading} from './loadingComponent';
 import { baseUrl } from '../shared/baseUrl';
 import {FadeTransform, Fade, Stagger} from 'react-animation-components';
@@ -73,7 +73,7 @@ import {FadeTransform, Fade, Stagger} from 'react-animation-components';
                 </div>
             );
         }
-        else if (props.errmsg) {
+        else if (props.errMsg) {
             return(
                 <div className="container">
                     <div className="row">            

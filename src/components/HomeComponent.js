@@ -18,7 +18,6 @@ const RenderCard = (props) =>{
     else if(props.item)
     {
         const item = props.item;
-        var x = props.item.image;
         return(
             <FadeTransform
                 in
@@ -26,7 +25,7 @@ const RenderCard = (props) =>{
                     exitTransform: 'scale(0.5) translateY(-50%)'
                 }}>
                 <Card>
-                    <CardImg src={x[0]=="i"?baseUrl+x:x} alt={item.name}/>
+                    <CardImg src={baseUrl+item.image} alt={item.name}/>
                     <CardBody>
                         <CardTitle><h1>{item.name}</h1></CardTitle>
                         {item.designation ? <CardSubtitle><h2>{item.designation},</h2></CardSubtitle> : null }
@@ -51,7 +50,7 @@ function Home(props){
                     <RenderCard item= {props.promotion} isLoading={props.promoLoading} errmsg = {props.promoErrmsg}/>
                 </div>
                 <div className='col-sm col-md m-1'>
-                    <RenderCard item= {props.leader}/>
+                    <RenderCard item= {props.leader} isLoading = {props.leaderLoading} errmsg = {props.leaderErrmsg} />
                 </div>
             </div>
         </div>

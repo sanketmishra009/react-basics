@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import {Breadcrumb, BreadcrumbItem, Button, Label, Col, Row} from 'reactstrap';
-import {Control, Form, Errors, actions} from 'react-redux-form';
+import {Control, Form, Errors} from 'react-redux-form';
 import {Link} from 'react-router-dom';
 
 const required = (val) => val && val.length;
@@ -15,7 +15,18 @@ class Contact extends Component {
     }
 
     handleSubmit(values){
-        alert('current state is'+ JSON.stringify(values));
+        var feedback = {
+            "firstname": values.firstname,
+            "lastname": values.lastname,
+            "telnum": values.telnum,
+            "email": values.email,
+            "agree": values.agree,
+            "contactType": values.contactType,
+            "message": values.message
+        };
+        feedback.data = new Date().toISOString();
+        alert('current state is'+ JSON.stringify(feedback));
+        this.props.postFeedback(feedback);
         this.props.resetFeedbackForm();
     }
     render (){
